@@ -23,29 +23,31 @@ public class BlogPostController {
 
     @CrossOrigin
     @PutMapping
-    public void insert(@RequestBody BlogPost blogPost){
+    public int insert(@RequestBody BlogPost blogPost){
         //Insert only inserts data
         this.blogPostRepository.insert(blogPost);
+        return 200;
     }
 
     @CrossOrigin
     @PostMapping
-    public void update(@RequestBody BlogPost blogPost){
+    public int update(@RequestBody BlogPost blogPost){
         //Save can update data
         this.blogPostRepository.save(blogPost);
+        return 200;
     }
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") String id){
+    public int delete(@PathVariable("id") String id){
         this.blogPostRepository.deleteById(id);
+        return 200;
     }
 
     @CrossOrigin
     @GetMapping("/title/{title}")
     public List<BlogPost> getByTitle(@PathVariable("title") String title){
         List<BlogPost> blogPosts = this.blogPostRepository.findByTitle(title);
-
         return blogPosts;
     }
 }
