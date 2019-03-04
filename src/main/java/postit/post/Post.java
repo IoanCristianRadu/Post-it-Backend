@@ -1,16 +1,16 @@
-package blog;
+package postit.post;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "BlogPosts")
-public class BlogPost {
+@Document(collection = "Posts")
+public class Post {
     @Id
     private String id;
     private String title;
     private String content;
 
-    public BlogPost(String title, String content){
+    public Post(String title, String content){
         this.title = title;
         this.content = content;
     }
@@ -41,7 +41,7 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return "BlogPost{" +
+        return "Post{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
