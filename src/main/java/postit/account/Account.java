@@ -2,6 +2,9 @@ package postit.account;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import postit.comment.Comment;
+
+import java.util.ArrayList;
 
 @Document(collection = "Accounts")
 public class Account {
@@ -9,10 +12,12 @@ public class Account {
     private String id;
     private String username;
     private String password;
+    private ArrayList<Comment> comments;
 
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
+        this.comments = new ArrayList<>();
     }
 
     public String getId() {
@@ -37,5 +42,23 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", comments=" + comments +
+                '}';
     }
 }
