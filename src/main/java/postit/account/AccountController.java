@@ -34,11 +34,54 @@ public class AccountController {
         return 200;
     }
 
+    //test
     @CrossOrigin
     @GetMapping("/login/{username}/{password}")
-    public int logIn(@PathVariable("username") String username, @PathVariable("password") String password){
+    public int logIn2(@PathVariable("username") String username, @PathVariable("password") String password){
         Account account = this.accountRepository.findByUsername(username);
         if(account.getPassword().equals(password)) return 202;
         return 400;
+    }
+
+    @CrossOrigin
+    @PostMapping("/login")
+    public int logIn(@RequestBody UsernamePassword usernamePassword){
+        Account account = this.accountRepository.findByUsername(usernamePassword.getUsername());
+        if(account.getPassword().equals(usernamePassword.getPassword())) return 202;
+        return 400;
+    }
+}
+
+class UsernamePassword{
+    private String username;
+    private String password;
+
+    public UsernamePassword(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UsernamePassword{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
