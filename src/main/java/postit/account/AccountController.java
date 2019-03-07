@@ -45,10 +45,10 @@ public class AccountController {
 
     @CrossOrigin
     @PostMapping("/login")
-    public int logIn(@RequestBody UsernamePassword usernamePassword){
+    public String logIn(@RequestBody UsernamePassword usernamePassword){
         Account account = this.accountRepository.findByUsername(usernamePassword.getUsername());
-        if(account.getPassword().equals(usernamePassword.getPassword())) return 202;
-        return 400;
+        if(account.getPassword().equals(usernamePassword.getPassword())) return "\"" + account.getId() + "\"";
+        return "";
     }
 }
 
