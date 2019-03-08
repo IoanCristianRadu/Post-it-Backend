@@ -12,11 +12,13 @@ public class Post {
     private String id;
     private String title;
     private String content;
+    private String username;
     private ArrayList<Comment> comments;
 
-    public Post(String title, String content){
+    public Post(String title, String content, String username) {
         this.title = title;
         this.content = content;
+        this.username = username;
         this.comments = new ArrayList<>();
     }
 
@@ -44,6 +46,14 @@ public class Post {
         this.content = content;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public ArrayList<Comment> getComments() {
         return comments;
     }
@@ -58,6 +68,7 @@ public class Post {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", username='" + username + '\'' +
                 ", comments=" + comments +
                 '}';
     }
