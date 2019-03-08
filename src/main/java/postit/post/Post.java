@@ -13,12 +13,14 @@ public class Post {
     private String title;
     private String content;
     private String username;
+    private String photoURL;
     private ArrayList<Comment> comments;
 
-    public Post(String title, String content, String username) {
+    public Post(String title, String content, String username, String photoURL) {
         this.title = title;
         this.content = content;
         this.username = username;
+        this.photoURL = photoURL;
         this.comments = new ArrayList<>();
     }
 
@@ -62,6 +64,14 @@ public class Post {
         this.comments = comments;
     }
 
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -69,6 +79,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", username='" + username + '\'' +
+                ", photoURL='" + photoURL + '\'' +
                 ", comments=" + comments +
                 '}';
     }
