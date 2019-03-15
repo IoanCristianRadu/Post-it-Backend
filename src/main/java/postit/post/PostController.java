@@ -22,11 +22,35 @@ public class PostController {
     }
 
     @CrossOrigin
+    @GetMapping("/username/{username}")
+    public List<Post> postComment(@PathVariable("username") String username) {
+        return this.postRepository.findByUsername(username);
+    }
+
+    @CrossOrigin
+    @GetMapping("/title/{title}")
+    public List<Post> getByTitle(@PathVariable("title") String title) {
+        return this.postRepository.findByTitle(title);
+    }
+
+    @CrossOrigin
     @PutMapping
     public int insert(@RequestBody Post post) {
         //Insert only inserts data
         this.postRepository.insert(post);
         return 200;
+    }
+
+    @CrossOrigin
+    @PutMapping("/comment/{id}")
+    public void postComment(@PathVariable("id") String id, @RequestBody Comment comment) {
+        Optional<Post> optionalPost = this.postRepository.findById(id);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            post.addComment(comment);
+            this.postRepository.save(post);
+            System.out.println(post);
+        }
     }
 
     @CrossOrigin
@@ -42,23 +66,5 @@ public class PostController {
     public int delete(@PathVariable("id") String id) {
         this.postRepository.deleteById(id);
         return 200;
-    }
-
-    @CrossOrigin
-    @GetMapping("/title/{title}")
-    public List<Post> getByTitle(@PathVariable("title") String title) {
-        return this.postRepository.findByTitle(title);
-    }
-
-    @CrossOrigin
-    @PutMapping("/comment/{id}")
-    public void postComment(@PathVariable("id") String id, @RequestBody Comment comment) {
-        Optional<Post> optionalPost = this.postRepository.findById(id);
-        if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-            post.addComment(comment);
-            this.postRepository.save(post);
-            System.out.println(post);
-        }
     }
 }
