@@ -72,7 +72,7 @@ public class Post {
         this.photoURL = photoURL;
     }
 
-    void addComment(Comment comment){
+    void addComment(Comment comment) {
         this.comments.add(comment);
     }
 

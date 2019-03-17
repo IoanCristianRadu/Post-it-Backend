@@ -11,9 +11,18 @@ public class AccountController {
         this.accountRepository = postRepository;
     }
 
+    //test
+    @CrossOrigin
+    @GetMapping("/login/{username}/{password}")
+    public int logIn2(@PathVariable("username") String username, @PathVariable("password") String password) {
+        Account account = this.accountRepository.findByUsername(username);
+        if (account.getPassword().equals(password)) return 202;
+        return 400;
+    }
+
     @CrossOrigin
     @PutMapping
-    public int insert(@RequestBody Account account){
+    public int insert(@RequestBody Account account) {
         //Insert only inserts data
         this.accountRepository.insert(account);
         return 200;
@@ -21,7 +30,7 @@ public class AccountController {
 
     @CrossOrigin
     @PostMapping
-    public int update(@RequestBody Account account){
+    public int update(@RequestBody Account account) {
         //Save can update data
         this.accountRepository.save(account);
         return 200;
@@ -29,30 +38,21 @@ public class AccountController {
 
     @CrossOrigin
     @DeleteMapping("/{id}")
-    public int delete(@PathVariable("id") String id){
+    public int delete(@PathVariable("id") String id) {
         this.accountRepository.deleteById(id);
         return 200;
     }
 
-    //test
-    @CrossOrigin
-    @GetMapping("/login/{username}/{password}")
-    public int logIn2(@PathVariable("username") String username, @PathVariable("password") String password){
-        Account account = this.accountRepository.findByUsername(username);
-        if(account.getPassword().equals(password)) return 202;
-        return 400;
-    }
-
     @CrossOrigin
     @PostMapping("/login")
-    public String logIn(@RequestBody UsernamePassword usernamePassword){
+    public String logIn(@RequestBody UsernamePassword usernamePassword) {
         Account account = this.accountRepository.findByUsername(usernamePassword.getUsername());
-        if(account.getPassword().equals(usernamePassword.getPassword())) return "\"" + account.getId() + "\"";
+        if (account.getPassword().equals(usernamePassword.getPassword())) return "\"" + account.getId() + "\"";
         return "";
     }
 }
 
-class UsernamePassword{
+class UsernamePassword {
     private String username;
     private String password;
 
